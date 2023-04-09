@@ -8,7 +8,6 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var binding:ActivityProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setProfile()
@@ -16,11 +15,8 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun setProfile(){
         with(binding){
-            var mName = intent.getStringExtra("name")
-            var mSpe = intent.getStringExtra("spe")
-            tvName.text= mName
-            tvSpecialty.text=mSpe
+            tvName.text = intent.getStringExtra("name")
+            tvSpecialty.text = intent.getStringExtra("spe")
         }
     }
-
 }

@@ -86,7 +86,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="30dp"
-        android:inputType="textPassword"
         android:hint="@string/et_name"/>
 
     <TextView
@@ -110,7 +109,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="30dp"
-        android:inputType="textPassword"
         android:hint="@string/et_specialty"/>
 
 
