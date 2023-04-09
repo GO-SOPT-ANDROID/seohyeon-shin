@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import org.android.go.sopt.databinding.ActivityProfileBinding
 
 class ProfileActivity : AppCompatActivity() {
-    lateinit var binding:ActivityProfileBinding
+    lateinit var binding: ActivityProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
@@ -13,8 +13,8 @@ class ProfileActivity : AppCompatActivity() {
         setProfile()
     }
 
-    private fun setProfile(){
-        with(binding){
+    private fun setProfile() {
+        with(binding) {
             tvName.text = intent.getStringExtra("name")
             tvSpecialty.text = intent.getStringExtra("spe")
         }
