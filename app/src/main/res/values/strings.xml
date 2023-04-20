@@ -15,4 +15,7 @@
     <string name="tv_specialty">특기</string>
     <string name="et_specialty">특기를 입력하세요.</string>
     <string name="confirm_signup">회원가입 완료</string>
+    <string name="bottom_home">홈</string>
+    <string name="bottom_search">검색</string>
+    <string name="bottom_gallery">갤러리</string>
 </resources>
