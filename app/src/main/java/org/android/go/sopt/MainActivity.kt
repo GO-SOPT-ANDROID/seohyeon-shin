@@ -17,18 +17,22 @@ class MainActivity : AppCompatActivity() {
         setBottomNav()
     }
 
-    private fun setBottomNav(){
-        binding.bnvMain.setOnItemSelectedListener {
-            changeFragment(
-                when(it.itemId){
-                    R.id.menu_home -> HomeFragment()
-                    R.id.menu_gallery->GalleryFragment()
-                    else -> SearchFragment()
-                }
-            )
-            true
+    private fun setBottomNav() {
+        binding.bnvMain.run {
+            setOnItemSelectedListener {
+                changeFragment(
+                    when (it.itemId) {
+                        R.id.menu_home -> HomeFragment()
+                        R.id.menu_gallery -> GalleryFragment()
+                        else -> SearchFragment()
+                    }
+                )
+                true
+            }
+            selectedItemId = R.id.menu_home
         }
     }
+
     private fun changeFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction()
             .replace(R.id.fcv_main,fragment)

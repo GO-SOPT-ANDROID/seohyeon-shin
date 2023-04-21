@@ -18,4 +18,6 @@
     <string name="bottom_home">홈</string>
     <string name="bottom_search">검색</string>
     <string name="bottom_gallery">갤러리</string>
+    <string name="repo_name_title">Repo Name</string>
+    <string name="repo_name">SeoHyeon</string>
 </resources>

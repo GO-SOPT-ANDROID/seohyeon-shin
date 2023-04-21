@@ -5,6 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import org.android.go.sopt.adapter.RepoRVAdapter
+import org.android.go.sopt.adapter.RepoTitleRVAdapter
 import org.android.go.sopt.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -24,6 +28,12 @@ class HomeFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val concatAdapter = ConcatAdapter(RepoTitleRVAdapter(requireContext()),RepoRVAdapter(requireContext()))
+        with(binding){
+            rvHome.adapter = concatAdapter
+            rvHome.layoutManager = LinearLayoutManager(context)
+        }
     }
 
     override fun onDestroyView() {
