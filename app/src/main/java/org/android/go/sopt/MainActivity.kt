@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
             setOnItemReselectedListener {
                 scrollTop()
             }
-
             setOnItemSelectedListener {
                 changeFragment(
                     when (it.itemId) {
