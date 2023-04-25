@@ -11,7 +11,7 @@ abstract class BaseActivity <T:ViewDataBinding>(
     private lateinit var binding:T
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = DataBindingUtil.setContentView(this,layoutRes)
+        binding.lifecycleOwner = this // LiveData 사용을 위해 지정
     }
 }
