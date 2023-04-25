@@ -28,16 +28,19 @@ class HomeFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initAdapter()
+    }
 
+    private fun initAdapter(){
         val concatAdapter = ConcatAdapter(RepoTitleRVAdapter(requireContext()),RepoRVAdapter(requireContext()))
         with(binding){
             rvHome.adapter = concatAdapter
             rvHome.layoutManager = LinearLayoutManager(context)
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
     }
+
 }
