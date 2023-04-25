@@ -20,4 +20,6 @@
     <string name="bottom_gallery">갤러리</string>
     <string name="repo_name_title">Repo Name</string>
     <string name="repo_name">SeoHyeon</string>
+    <string name="fragment_gallery">Gallery</string>
+    <string name="fragment_search">Search</string>
 </resources>
