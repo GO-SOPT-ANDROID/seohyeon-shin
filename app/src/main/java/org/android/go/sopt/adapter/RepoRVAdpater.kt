@@ -3,11 +3,13 @@ package org.android.go.sopt.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.android.go.sopt.data.Repository
 import org.android.go.sopt.databinding.ItemRepoBinding
 
-class RepoRVAdapter(context: Context) : RecyclerView.Adapter<RepoRVAdapter.RepoViewHolder>() {
+class RepoRVAdapter(context: Context) : ListAdapter<Repository, RepoRVAdapter.RepoViewHolder>(diffUtil) {
 
     private val inflater by lazy { LayoutInflater.from(context) }
 
@@ -33,6 +35,17 @@ class RepoRVAdapter(context: Context) : RecyclerView.Adapter<RepoRVAdapter.RepoV
         return repoList.size
     }
 
+    companion object{
+        val diffUtil = object:DiffUtil.ItemCallback<Repository>(){
+            override fun areItemsTheSame(oldItem: Repository, newItem: Repository): Boolean {
+                return oldItem.name == newItem.name
+            // item의 고유한 정보로 비교하면되는데 Repo data에서 title보다는 name이 적절할 거 같아 name으로 비교.
+            }
+            override fun areContentsTheSame(oldItem: Repository, newItem: Repository): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
    class RepoViewHolder(private val binding:ItemRepoBinding) : RecyclerView.ViewHolder(binding.root){
        fun bind(item:Repository){
            with(binding) {
