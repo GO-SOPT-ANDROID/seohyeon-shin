@@ -23,4 +23,6 @@
     <string name="fragment_gallery">Gallery</string>
     <string name="fragment_search">Search</string>
     <string name="string_search">검색어를 입력해주세요.</string>
+    <string name="home_main_title">Repository List</string>
+    <string name="home_sub_title">List of lists applied with motionLayout</string>
 </resources>
