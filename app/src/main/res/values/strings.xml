@@ -22,4 +22,5 @@
     <string name="repo_name">SeoHyeon</string>
     <string name="fragment_gallery">Gallery</string>
     <string name="fragment_search">Search</string>
+    <string name="string_search">검색어를 입력해주세요.</string>
 </resources>
