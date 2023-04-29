@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layoutDescription="@xml/fragment_home_scene">
+    <View
+        android:id="@+id/view_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/rv_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/ic_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_github_mark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"/>
+    <TextView
+        android:id="@+id/tv_main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_main_title"
+        android:textSize="32sp"
+        android:textColor="@color/black"
+        android:autoSizeTextType="uniform"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@id/ic_logo"
+        app:layout_constraintTop_toBottomOf="@id/ic_logo"/>
+    <TextView
+        android:id="@+id/tv_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_sub_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_main_title"
+        app:layout_constraintStart_toStartOf="@id/tv_main_title"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        android:autoSizeTextType="uniform"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_sub_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:clipToPadding="false"
+        android:paddingBottom="56dp"
+        android:layout_margin="20dp"
+        tools:listitem="@layout/item_repo"/>
+
+    <View
+        android:id="@+id/view_spacer"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@id/ic_logo"
+        app:layout_constraintEnd_toEndOf="@id/ic_logo"
+        app:layout_constraintTop_toBottomOf="@id/ic_logo"
+        app:layout_constraintStart_toStartOf="@id/ic_logo"/>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
