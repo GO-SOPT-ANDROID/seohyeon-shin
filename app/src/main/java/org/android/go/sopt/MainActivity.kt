@@ -8,6 +8,7 @@ import org.android.go.sopt.base.BaseActivity
 import org.android.go.sopt.databinding.ActivityMainBinding
 import org.android.go.sopt.fragment.GalleryFragment
 import org.android.go.sopt.fragment.HomeFragment
+import org.android.go.sopt.fragment.MyPageFragment
 import org.android.go.sopt.fragment.SearchFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main){
@@ -34,7 +35,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main){
                     when (it.itemId) {
                         R.id.menu_home -> HomeFragment()
                         R.id.menu_gallery -> GalleryFragment()
-                        else -> SearchFragment()
+                        R.id.menu_search -> SearchFragment()
+                        else -> MyPageFragment()
                     }
                 )
                 true
