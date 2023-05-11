@@ -13,6 +13,13 @@ object ApiFactory {
             .build()
     }
 
+    val retrofitUserList:Retrofit by lazy{
+        Retrofit.Builder()
+            .baseUrl("https://j17lt.csb.app/")
+            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .build()
+    }
+
     inline fun <reified T> create(): T = retrofit.create<T>(T::class.java)
 }
 

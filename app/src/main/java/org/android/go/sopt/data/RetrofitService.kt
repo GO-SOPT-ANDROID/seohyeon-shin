@@ -2,16 +2,20 @@ package org.android.go.sopt.data
 
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface RetrofitService {
-    @POST("/sign-up")
+    @POST("sign-up")
     fun signUp(
         @Body request: RequestSignUpDto
     ): Call<ResponseSignUpDto>
 
-    @POST("/sign-in")
+    @POST("sign-in")
     fun login(
         @Body request: RequestLoginDto
     ): Call<ResponseLoginDto>
+
+    @GET("api/users?page=2")
+    fun getUserList() :Call<ResponseUserListDto>
 }
