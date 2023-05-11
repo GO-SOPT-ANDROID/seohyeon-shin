@@ -21,13 +21,13 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
         clickBtn()
     }
 
-    private fun clickBtn(){
+    private fun clickBtn() {
         binding.btnSignup.setOnClickListener {
             completeSignUp()
         }
     }
+
     private fun completeSignUp() {
-        Log.e("hyeon", "retrofit 진입")
         retrofitService.signUp(
             with(binding) {
                 RequestSignUpDto(
@@ -42,28 +42,28 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
                 call: Call<ResponseSignUpDto>,
                 response: Response<ResponseSignUpDto>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     response.body()?.message?.let {
-                        Log.e("hyeon",it)
-                        with(binding){
+                        Log.e("hyeon", it)
+                        with(binding) {
                             setId(etId.text.toString())
                             setPwd(etPw.text.toString())
                         }
-                        Log.e("hyeon", "retrofit 진입1")
-                        Toast.makeText(this@SignUpActivity, "회원가입에 성공했습니다", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@SignUpActivity, "회원가입에 성공했습니다", Toast.LENGTH_SHORT)
+                            .show()
                         if (!isFinishing) finish()
                     }
-                }
-                else{
+                } else {
                     response.body()?.message?.let {
-                        Toast.makeText(this@SignUpActivity,"서버 통신 실패",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@SignUpActivity, "서버 통신 실패", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
 
             override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
-                t.message?.let{
-                    Toast.makeText(this@SignUpActivity,"서버통신 실패 응답값이 없습니다.",Toast.LENGTH_SHORT).show()
+                t.message?.let {
+                    Toast.makeText(this@SignUpActivity, "서버통신 실패 응답값이 없습니다.", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         })
