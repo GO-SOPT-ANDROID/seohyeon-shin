@@ -5,10 +5,13 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface RetrofitService {
-    @POST("sign-up")
+    @POST("/sign-up")
     fun signUp(
-        @Body request:RequestSignUpDto): Call<ResponseSignUpDto>
-    @POST("sign-in")
+        @Body request: RequestSignUpDto
+    ): Call<ResponseSignUpDto>
+
+    @POST("/sign-in")
     fun login(
-        @Body request:RequestLoginDto) : Call<ResponseLoginDto>
+        @Body request: RequestLoginDto
+    ): Call<ResponseLoginDto>
 }

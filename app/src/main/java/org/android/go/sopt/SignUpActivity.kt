@@ -27,6 +27,7 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
         }
     }
     private fun completeSignUp() {
+        Log.e("hyeon", "retrofit 진입")
         retrofitService.signUp(
             with(binding) {
                 RequestSignUpDto(
@@ -43,25 +44,26 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
             ) {
                 if (response.isSuccessful){
                     response.body()?.message?.let {
+                        Log.e("hyeon",it)
                         with(binding){
                             setId(etId.text.toString())
                             setPwd(etPw.text.toString())
                         }
-                        Log.e("hyeon",response.body()?.data?.name + response.body()?.data?.skill)
-                        Toast.makeText(this@SignUpActivity, "회원가입에 성공했습니다", Toast.LENGTH_SHORT)
+                        Log.e("hyeon", "retrofit 진입1")
+                        Toast.makeText(this@SignUpActivity, "회원가입에 성공했습니다", Toast.LENGTH_SHORT).show()
+                        if (!isFinishing) finish()
                     }
-                    if (!isFinishing) finish()
                 }
                 else{
                     response.body()?.message?.let {
-                        Toast.makeText(this@SignUpActivity,"서버 통신 실패",Toast.LENGTH_SHORT)
+                        Toast.makeText(this@SignUpActivity,"서버 통신 실패",Toast.LENGTH_SHORT).show()
                     }
                 }
             }
 
             override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
                 t.message?.let{
-                    Toast.makeText(this@SignUpActivity,"서버통신 실패 응답값이 없습니다.",Toast.LENGTH_SHORT)
+                    Toast.makeText(this@SignUpActivity,"서버통신 실패 응답값이 없습니다.",Toast.LENGTH_SHORT).show()
                 }
             }
         })

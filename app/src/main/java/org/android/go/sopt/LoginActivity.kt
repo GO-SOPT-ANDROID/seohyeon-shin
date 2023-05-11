@@ -50,30 +50,28 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 call: Call<ResponseLoginDto>,
                 response: Response<ResponseLoginDto>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     response.body()?.message?.let {
-                        when(response.body()?.status) {
-                            200 -> {
-                                Log.e("hyeon", response.body()?.data?.id.toString())
-                                if (!isFinishing) finish()
-                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                            }
-                            else -> {
-                                Toast.makeText(this@LoginActivity,"비밀번호 또는 아이디가 틀렸습니다.",Toast.LENGTH_SHORT)
-                            }
+                        if (response.body()?.status == 200) {
+                            Log.e("hyeon", response.body()?.data?.id.toString())
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "로그인이 성공되었습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            if (!isFinishing) finish()
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         }
                     }
-                }
-                else{
-                    response.body()?.message?.let {
-                        Toast.makeText(this@LoginActivity,"서버 통신 실패",Toast.LENGTH_SHORT)
-                    }
+                } else {
+                    Toast.makeText(this@LoginActivity, "비밀번호 또는 아이디가 틀렸습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
                 t.message?.let {
-                    Toast.makeText(this@LoginActivity, "서버통신 실패 응답값이 없습니다.", Toast.LENGTH_SHORT)
+                    Log.e("hyeon", "onFailure $it")
+                    Toast.makeText(this@LoginActivity, "서버통신 실패 응답값이 없습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
         })

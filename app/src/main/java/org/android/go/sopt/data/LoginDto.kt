@@ -8,9 +8,10 @@ data class RequestLoginDto(
     @SerialName("id")
     val id: String,
     @SerialName("password")
-    val password: String
+    val password: String,
 )
 
+@Serializable
 data class ResponseLoginDto(
     @SerialName("status")
     val status: Int,
