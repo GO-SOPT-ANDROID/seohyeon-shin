@@ -1,4 +1,4 @@
-package org.android.go.sopt.data
+package org.android.go.sopt.data.model
 
 data class Repository(
     val id :Int,

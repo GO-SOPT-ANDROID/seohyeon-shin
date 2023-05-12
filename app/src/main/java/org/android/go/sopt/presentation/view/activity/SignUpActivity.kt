@@ -1,14 +1,13 @@
-package org.android.go.sopt
+package org.android.go.sopt.presentation.view.activity
 
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import org.android.go.sopt.R
 import org.android.go.sopt.base.BaseActivity
-import org.android.go.sopt.data.Login.Companion.setId
-import org.android.go.sopt.data.Login.Companion.setPwd
-import org.android.go.sopt.data.RequestSignUpDto
-import org.android.go.sopt.data.ResponseSignUpDto
-import org.android.go.sopt.data.ServicePool
+import org.android.go.sopt.data.model.RequestSignUpDto
+import org.android.go.sopt.data.model.ResponseSignUpDto
+import org.android.go.sopt.data.repository.ServicePool
 import org.android.go.sopt.databinding.ActivitySignupBinding
 import retrofit2.Call
 import retrofit2.Response
@@ -45,10 +44,6 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
                 if (response.isSuccessful) {
                     response.body()?.message?.let {
                         Log.e("hyeon", it)
-                        with(binding) {
-                            setId(etId.text.toString())
-                            setPwd(etPw.text.toString())
-                        }
                         Toast.makeText(this@SignUpActivity, "회원가입에 성공했습니다", Toast.LENGTH_SHORT)
                             .show()
                         if (!isFinishing) finish()

@@ -1,14 +1,13 @@
-package org.android.go.sopt
+package org.android.go.sopt.presentation.view.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import org.android.go.sopt.R
 import org.android.go.sopt.base.BaseActivity
-import org.android.go.sopt.data.*
-import org.android.go.sopt.data.Login.Companion.getId
-import org.android.go.sopt.data.Login.Companion.getPwd
+import org.android.go.sopt.data.model.*
+import org.android.go.sopt.data.repository.ServicePool
 import org.android.go.sopt.databinding.ActivityLoginBinding
 import retrofit2.Call
 import retrofit2.Response

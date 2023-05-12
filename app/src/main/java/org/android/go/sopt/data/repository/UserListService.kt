@@ -1,4 +1,4 @@
-package org.android.go.sopt.data
+package org.android.go.sopt.data.repository
 
 import retrofit2.Call
 import retrofit2.http.GET

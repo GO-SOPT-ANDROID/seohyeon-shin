@@ -1,4 +1,4 @@
-package org.android.go.sopt.fragment
+package org.android.go.sopt.presentation.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

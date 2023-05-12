@@ -1,10 +1,12 @@
-package org.android.go.sopt.data
+package org.android.go.sopt.data.repository
 
+import org.android.go.sopt.data.model.RequestLoginDto
+import org.android.go.sopt.data.model.RequestSignUpDto
+import org.android.go.sopt.data.model.ResponseLoginDto
+import org.android.go.sopt.data.model.ResponseSignUpDto
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface RetrofitService {
     @POST("sign-up")

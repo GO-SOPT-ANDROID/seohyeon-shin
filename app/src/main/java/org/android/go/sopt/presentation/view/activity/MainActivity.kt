@@ -1,15 +1,15 @@
-package org.android.go.sopt
+package org.android.go.sopt.presentation.view.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import org.android.go.sopt.R
 import org.android.go.sopt.base.BaseActivity
 import org.android.go.sopt.databinding.ActivityMainBinding
-import org.android.go.sopt.fragment.GalleryFragment
-import org.android.go.sopt.fragment.HomeFragment
-import org.android.go.sopt.fragment.MyPageFragment
-import org.android.go.sopt.fragment.SearchFragment
+import org.android.go.sopt.presentation.view.fragment.GalleryFragment
+import org.android.go.sopt.presentation.view.fragment.HomeFragment
+import org.android.go.sopt.presentation.view.fragment.MyPageFragment
+import org.android.go.sopt.presentation.view.fragment.SearchFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main){
     override fun onCreate(savedInstanceState: Bundle?) {

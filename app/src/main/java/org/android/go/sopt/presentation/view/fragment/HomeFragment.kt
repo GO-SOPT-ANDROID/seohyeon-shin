@@ -1,4 +1,4 @@
-package org.android.go.sopt.fragment
+package org.android.go.sopt.presentation.view.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -9,12 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import org.android.go.sopt.adapter.RepoRVAdapter
-import org.android.go.sopt.data.ApiFactory
-import org.android.go.sopt.data.ApiFactory.retrofitUserList
+import org.android.go.sopt.data.repository.ApiFactory.retrofitUserList
 import org.android.go.sopt.data.ResponseUserListDto.Data
 import org.android.go.sopt.data.ResponseUserListDto
-import org.android.go.sopt.data.RetrofitService
-import org.android.go.sopt.data.UserListService
+import org.android.go.sopt.data.repository.UserListService
 import org.android.go.sopt.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,7 +49,6 @@ class HomeFragment : Fragment() {
             ) {
                 if (response.isSuccessful) {
                     userList = response.body()?.data!!
-                    Log.e("hyeon",userList.toString())
                     initAdapter()
                 }
 
