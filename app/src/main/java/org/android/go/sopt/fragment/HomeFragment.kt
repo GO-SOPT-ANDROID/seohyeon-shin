@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import org.android.go.sopt.adapter.RepoRVAdapter
 import org.android.go.sopt.data.ApiFactory
-import org.android.go.sopt.data.Data
+import org.android.go.sopt.data.ApiFactory.retrofitUserList
+import org.android.go.sopt.data.ResponseUserListDto.Data
 import org.android.go.sopt.data.ResponseUserListDto
 import org.android.go.sopt.data.RetrofitService
+import org.android.go.sopt.data.UserListService
 import org.android.go.sopt.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,12 +40,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUserList()
-        initAdapter()
     }
 
     private fun setUserList() {
-        val retrofitService = ApiFactory.retrofitUserList.create(RetrofitService::class.java)
-        retrofitService.getUserList().enqueue(object : Callback<ResponseUserListDto> {
+        val retrofitService = retrofitUserList.create(UserListService::class.java)
+        retrofitService.getUserList(1).enqueue(object : Callback<ResponseUserListDto> {
             override fun onResponse(
                 call: Call<ResponseUserListDto>,
                 response: Response<ResponseUserListDto>
@@ -51,6 +52,7 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful) {
                     userList = response.body()?.data!!
                     Log.e("hyeon",userList.toString())
+                    initAdapter()
                 }
 
                 else {

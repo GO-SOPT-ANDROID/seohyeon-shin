@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface RetrofitService {
     @POST("sign-up")
@@ -15,7 +16,4 @@ interface RetrofitService {
     fun login(
         @Body request: RequestLoginDto
     ): Call<ResponseLoginDto>
-
-    @GET("api/users?page=2")
-    fun getUserList() :Call<ResponseUserListDto>
 }

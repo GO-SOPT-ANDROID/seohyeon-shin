@@ -1,12 +1,13 @@
 package org.android.go.sopt.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import org.android.go.sopt.data.Data
+import org.android.go.sopt.data.ResponseUserListDto.Data
 import org.android.go.sopt.databinding.ItemRepoBinding
 
 class RepoRVAdapter(context: Context,_userList:List<Data>) : ListAdapter<Data, RepoRVAdapter.RepoViewHolder>(diffUtil) {
@@ -16,6 +17,7 @@ class RepoRVAdapter(context: Context,_userList:List<Data>) : ListAdapter<Data, R
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
         holder.bind(userList[position])
+        Log.e("hyeon",userList.toString())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {

@@ -15,7 +15,7 @@ object ApiFactory {
 
     val retrofitUserList:Retrofit by lazy{
         Retrofit.Builder()
-            .baseUrl("https://j17lt.csb.app/")
+            .baseUrl("https://reqres.in/")
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
