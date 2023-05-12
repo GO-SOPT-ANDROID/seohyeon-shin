@@ -44,7 +44,7 @@ class MyPageFragment : Fragment() {
 
     private fun setUserData() {
         Log.e("hyeon","id : ${User.getId()}")
-        retrofitService.getUserData("12344").enqueue(object : retrofit2.Callback<ResponseUserDto>{
+        retrofitService.getUserData(User.getId()).enqueue(object : retrofit2.Callback<ResponseUserDto>{
             override fun onResponse(
                 call: Call<ResponseUserDto>,
                 response: Response<ResponseUserDto>
