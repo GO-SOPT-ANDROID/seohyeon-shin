@@ -1,12 +1,8 @@
 package org.android.go.sopt.data.repository
 
-import org.android.go.sopt.data.model.RequestLoginDto
-import org.android.go.sopt.data.model.RequestSignUpDto
-import org.android.go.sopt.data.model.ResponseLoginDto
-import org.android.go.sopt.data.model.ResponseSignUpDto
+import org.android.go.sopt.data.model.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface RetrofitService {
     @POST("sign-up")
@@ -18,4 +14,9 @@ interface RetrofitService {
     fun login(
         @Body request: RequestLoginDto
     ): Call<ResponseLoginDto>
+
+    @GET("info/{userId}")
+    fun getUserData(
+        @Path("userId") userId:String
+    ) : Call <ResponseUserDto>
 }

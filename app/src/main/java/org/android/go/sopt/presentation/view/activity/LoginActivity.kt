@@ -52,6 +52,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 if (response.isSuccessful) {
                     response.body()?.message?.let {
                         if (response.body()?.status == 200) {
+                            User.setId(response.body()?.data?.id!!)
                             Log.e("hyeon", response.body()?.data?.id.toString())
                             Toast.makeText(
                                 this@LoginActivity,

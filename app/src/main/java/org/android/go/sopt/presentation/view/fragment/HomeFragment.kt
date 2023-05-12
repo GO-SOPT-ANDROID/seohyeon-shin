@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import org.android.go.sopt.adapter.RepoRVAdapter
 import org.android.go.sopt.data.repository.ApiFactory.retrofitUserList
-import org.android.go.sopt.data.ResponseUserListDto.Data
-import org.android.go.sopt.data.ResponseUserListDto
+import org.android.go.sopt.data.model.ResponseUserListDto.Data
+import org.android.go.sopt.data.model.ResponseUserListDto
 import org.android.go.sopt.data.repository.UserListService
 import org.android.go.sopt.databinding.FragmentHomeBinding
 import retrofit2.Call
