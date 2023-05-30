@@ -1,55 +1,50 @@
 package org.android.go.sopt.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import org.android.go.sopt.data.Repository
+import com.bumptech.glide.Glide
+import org.android.go.sopt.data.model.ResponseUserListDto.Data
 import org.android.go.sopt.databinding.ItemRepoBinding
 
-class RepoRVAdapter(context: Context) : ListAdapter<Repository, RepoRVAdapter.RepoViewHolder>(diffUtil) {
+class RepoRVAdapter(private val context: Context,_userList:List<Data>) : ListAdapter<Data, RepoRVAdapter.RepoViewHolder>(diffUtil) {
     private val inflater by lazy { LayoutInflater.from(context) }
-
-    private val repoList:List<Repository> = listOf(
-        Repository(1,"Repository1","name1"),
-        Repository(2,"Repository2","name2"),
-        Repository(3,"Repository3","name3"),
-        Repository(4,"Repository4","name4"),
-        Repository(5,"Repository5","name5"),
-        Repository(6,"Repository6","name6"),
-        Repository(7,"Repository7","name7")
-    )
+    private val userList:List<Data> = _userList
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
-        holder.bind(repoList[position])
+        holder.bind(userList[position])
+        Log.e("hyeon",userList.toString())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
         val binding = ItemRepoBinding.inflate(inflater,parent,false)
-        return RepoViewHolder(binding)
+        return RepoViewHolder(binding,context)
     }
     override fun getItemCount(): Int {
-        return repoList.size
+        return userList.size
     }
 
     companion object{
-        val diffUtil = object:DiffUtil.ItemCallback<Repository>(){
-            override fun areItemsTheSame(oldItem: Repository, newItem: Repository): Boolean {
+        val diffUtil = object:DiffUtil.ItemCallback<Data>(){
+            override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
                 return oldItem.id == newItem.id
             }
-            override fun areContentsTheSame(oldItem: Repository, newItem: Repository): Boolean {
+            override fun areContentsTheSame(oldItem:Data, newItem: Data): Boolean {
                 return oldItem == newItem
             }
         }
     }
-   class RepoViewHolder(private val binding:ItemRepoBinding) : RecyclerView.ViewHolder(binding.root){
-       fun bind(item:Repository){
+
+   class RepoViewHolder(private val binding:ItemRepoBinding, private val context:Context) : RecyclerView.ViewHolder(binding.root){
+       fun bind(item:Data){
            with(binding) {
-               tvRepoTitle.text = item.title
-               tvRepoName.text = item.name
+               tvRepoTitle.text = "${item.first_name}  ${item.last_name}"
+               tvRepoName.text = item.email
+               Glide.with(context).load(item.avatar).into(ivProfile);
            }
        }
     }
