@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import org.android.go.sopt.data.model.ResponseUserListDto.Data
+import org.android.go.sopt.data.model.response.ResponseUserListDto.Data
 import org.android.go.sopt.databinding.ItemRepoBinding
 
 class RepoRVAdapter(private val context: Context,_userList:List<Data>) : ListAdapter<Data, RepoRVAdapter.RepoViewHolder>(diffUtil) {

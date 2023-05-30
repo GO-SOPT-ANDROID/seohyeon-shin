@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import org.android.go.sopt.R
-import org.android.go.sopt.base.BaseActivity
+import org.android.go.sopt.util.base.BaseActivity
 import org.android.go.sopt.data.model.*
-import org.android.go.sopt.data.repository.ServicePool
+import org.android.go.sopt.data.model.ServicePool
+import org.android.go.sopt.data.model.request.RequestLoginDto
+import org.android.go.sopt.data.model.response.ResponseLoginDto
 import org.android.go.sopt.databinding.ActivityLoginBinding
 import retrofit2.Call
 import retrofit2.Response
@@ -64,14 +66,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                         }
                     }
                 } else {
-                    Toast.makeText(this@LoginActivity, "비밀번호 또는 아이디가 틀렸습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "비밀번호 또는 아이디가 틀렸습니다.", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
                 t.message?.let {
                     Log.e("hyeon", "onFailure $it")
-                    Toast.makeText(this@LoginActivity, "서버통신 실패 응답값이 없습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "서버통신 실패 응답값이 없습니다.", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         })
