@@ -6,21 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import org.android.go.sopt.adapter.RepoRVAdapter
-import org.android.go.sopt.data.repository.ApiFactory.retrofitUserList
-import org.android.go.sopt.data.model.ResponseUserListDto.Data
-import org.android.go.sopt.data.model.ResponseUserListDto
-import org.android.go.sopt.data.repository.UserListService
+import org.android.go.sopt.data.model.response.ResponseUserListDto.Data
 import org.android.go.sopt.databinding.FragmentHomeBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import org.android.go.sopt.presentation.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
-    private var userList:List<Data> = arrayListOf()
+    private val viewModel by viewModels <HomeViewModel>()
     private val binding: FragmentHomeBinding
         get() = requireNotNull(_binding) {
             "binding null"
@@ -37,36 +33,22 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getUserList()
         setUserList()
     }
 
-    private fun setUserList() {
-        val retrofitService = retrofitUserList.create(UserListService::class.java)
-        retrofitService.getUserList(1).enqueue(object : Callback<ResponseUserListDto> {
-            override fun onResponse(
-                call: Call<ResponseUserListDto>,
-                response: Response<ResponseUserListDto>
-            ) {
-                if (response.isSuccessful) {
-                    userList = response.body()?.data!!
-                    initAdapter()
-                }
-
-                else {
-                    Log.e("hyeon",response.body().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseUserListDto>, t: Throwable) {
-                t.message?.let {
-                    Log.e("hyeon", "onFailure $it")
-                }
-            }
-        })
+    private fun getUserList() {
+        viewModel.getUserList()
     }
 
-    private fun initAdapter() {
-        val concatAdapter = ConcatAdapter(RepoRVAdapter(requireContext(),userList))
+    private fun setUserList(){
+        viewModel.userResult.observe(requireActivity()){
+            Log.e("hyeon",it.toString())
+            initAdapter(it)
+        }
+    }
+    private fun initAdapter(userList : List<Data>) {
+        val concatAdapter = ConcatAdapter(RepoRVAdapter(requireContext(), userList))
         with(binding) {
             rvHome.adapter = concatAdapter
             rvHome.layoutManager = GridLayoutManager(context, 2)

@@ -1,66 +1,104 @@
 package org.android.go.sopt.presentation.view.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import android.widget.Toast
+import androidx.activity.viewModels
 import org.android.go.sopt.R
-import org.android.go.sopt.base.BaseActivity
-import org.android.go.sopt.data.model.RequestSignUpDto
-import org.android.go.sopt.data.model.ResponseSignUpDto
-import org.android.go.sopt.data.repository.ServicePool
+import org.android.go.sopt.util.base.BaseActivity
 import org.android.go.sopt.databinding.ActivitySignupBinding
-import retrofit2.Call
-import retrofit2.Response
+import org.android.go.sopt.presentation.viewmodel.SignUpViewModel
+import org.android.go.sopt.util.verifyId
+import org.android.go.sopt.util.verifyPw
 
 class SignUpActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_signup) {
-    private val retrofitService = ServicePool.retrofitService
+    private val viewModel by viewModels<SignUpViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        watchText()
+        checkEnableBtn()
         clickBtn()
-    }
-
-    private fun clickBtn() {
-        binding.btnSignup.setOnClickListener {
-            completeSignUp()
+        viewModel.signUpResult.observe(this) { signUpResult ->
+            startActivity(
+                Intent(
+                    this@SignUpActivity,
+                    MainActivity::class.java
+                )
+            )
         }
     }
 
-    private fun completeSignUp() {
-        retrofitService.signUp(
-            with(binding) {
-                RequestSignUpDto(
-                    etId.text.toString(),
-                    etPw.text.toString(),
-                    etName.text.toString(),
-                    etSpecialty.text.toString()
+    private fun checkEnableBtn() {
+        viewModel.name.value = binding.etName.text.toString()
+        viewModel.specialty.value = binding.etSpecialty.text.toString()
+
+        viewModel.enableBtn.observe(this) {enable ->
+            with(binding){
+                btnSignup.isEnabled = enable
+            }
+        }
+    }
+
+    private fun watchText() {
+        with(binding) {
+            etId.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    if (s != null && !verifyId(s.toString())) {
+                        layoutEtId.error = "아이디 영문, 숫자가 포함 6~10글자 이내"
+                    } else {
+                        layoutEtId.error = null
+                    }
+                    viewModel.id.value =s.toString()
+                }
+            })
+            etPw.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    if (s != null && !verifyPw(s.toString())) {
+                        layoutEtPw.error = "비밀번호 영문, 숫자, 특수문자가 포함되어야 하고 6~12글자 이내"
+                    } else {
+                        layoutEtPw.error = null
+                    }
+                    viewModel.pw.value =s.toString()
+                }
+            })
+        }
+    }
+
+    private fun clickBtn() {
+        with(binding){
+            btnSignup.setOnClickListener {
+                viewModel.signUp(
+                        etId.text.toString(),
+                        etPw.text.toString(),
+                        etName.text.toString(),
+                        etSpecialty.text.toString()
                 )
             }
-        ).enqueue(object : retrofit2.Callback<ResponseSignUpDto> {
-            override fun onResponse(
-                call: Call<ResponseSignUpDto>,
-                response: Response<ResponseSignUpDto>
-            ) {
-                if (response.isSuccessful) {
-                    response.body()?.message?.let {
-                        Log.e("hyeon", it)
-                        Toast.makeText(this@SignUpActivity, "회원가입에 성공했습니다", Toast.LENGTH_SHORT)
-                            .show()
-                        if (!isFinishing) finish()
-                    }
-                } else {
-                    response.body()?.message?.let {
-                        Toast.makeText(this@SignUpActivity, "서버 통신 실패", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
-                t.message?.let {
-                    Toast.makeText(this@SignUpActivity, "서버통신 실패 응답값이 없습니다.", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-        })
+        }
     }
 }

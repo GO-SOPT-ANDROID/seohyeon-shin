@@ -1,16 +1,13 @@
 package org.android.go.sopt.data.model
 
 class User {
-    companion object{
+    companion object {
         private var id = ""
-
-        fun getId():String{
+        fun getId(): String {
             return id
         }
-
-        fun setId(id:String){
+        fun setId(id: String) {
             this.id = id
         }
-
     }
 }

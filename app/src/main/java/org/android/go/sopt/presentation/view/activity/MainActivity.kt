@@ -4,21 +4,21 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import org.android.go.sopt.R
-import org.android.go.sopt.base.BaseActivity
+import org.android.go.sopt.util.base.BaseActivity
 import org.android.go.sopt.databinding.ActivityMainBinding
 import org.android.go.sopt.presentation.view.fragment.GalleryFragment
 import org.android.go.sopt.presentation.view.fragment.HomeFragment
 import org.android.go.sopt.presentation.view.fragment.MyPageFragment
 import org.android.go.sopt.presentation.view.fragment.SearchFragment
 
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main){
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
         setBottomNav()
     }
 
-    private fun initView(){
+    private fun initView() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_main)
         if (currentFragment == null) {
             changeFragment(HomeFragment())
@@ -44,7 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main){
         }
     }
 
-    private fun scrollTop(){
+    private fun scrollTop() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_main)
         if (currentFragment is HomeFragment) {
             val scrollView = currentFragment.view?.findViewById<RecyclerView>(R.id.rv_home)
@@ -52,9 +52,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main){
         }
     }
 
-    private fun changeFragment(fragment: Fragment){
+    private fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_main,fragment)
+            .replace(R.id.fcv_main, fragment)
             .commit()
     }
 }

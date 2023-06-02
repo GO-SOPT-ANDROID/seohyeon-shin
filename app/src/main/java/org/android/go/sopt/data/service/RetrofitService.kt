@@ -1,6 +1,11 @@
-package org.android.go.sopt.data.repository
+package org.android.go.sopt.data.service
 
 import org.android.go.sopt.data.model.*
+import org.android.go.sopt.data.model.request.RequestLoginDto
+import org.android.go.sopt.data.model.request.RequestSignUpDto
+import org.android.go.sopt.data.model.response.ResponseLoginDto
+import org.android.go.sopt.data.model.response.ResponseSignUpDto
+import org.android.go.sopt.data.model.response.ResponseUserDto
 import retrofit2.Call
 import retrofit2.http.*
 

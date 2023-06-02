@@ -1,8 +1,7 @@
-package org.android.go.sopt.data.model
+package org.android.go.sopt.data.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 data class ResponseUserListDto(
