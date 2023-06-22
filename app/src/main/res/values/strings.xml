@@ -5,6 +5,8 @@
     <string name="id">ID</string>
     <string name="et_hint_id">아이디를 입력하세요.</string>
     <string name="et_hint_pw">비밀번호를 입력하세요.</string>
+    <string name="et_hint_title">타이틀을 입력하세요.</string>
+    <string name="et_hint_singer">가수를 입력하세요.</string>
     <string name="login">LOGIN</string>
     <string name="pw">PW</string>
     <string name="sign_up">SIGN UP</string>

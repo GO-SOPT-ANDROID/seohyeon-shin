@@ -1,5 +1,6 @@
 package org.android.go.sopt.presentation.view.fragment
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import org.android.go.sopt.util.ContentUriRequestBody
 class GalleryFragment : Fragment() {
     private val viewModel by viewModels<GalleryViewModel>()
     private var _binding: FragmentGalleryBinding? = null
+    private lateinit var imgUri: Uri
     private val binding: FragmentGalleryBinding
         get() = requireNotNull(_binding) {
             "binding null"
@@ -24,22 +26,21 @@ class GalleryFragment : Fragment() {
     val launcher =
         registerForActivityResult(ActivityResultContracts.GetContent()) {
             with(binding) {
-               viewModel.setRequestBody(ContentUriRequestBody(requireContext(), it!!))
+                imgUri = it!!
                 ivGalleryFirst.load(it)
             }
         }
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
-    ) { isGranted:Boolean ->
+    ) { isGranted: Boolean ->
         if (isGranted) {
             Toast.makeText(
                 requireContext(),
                 "허가",
                 Toast.LENGTH_SHORT
             ).show()
-        }
-        else{
+        } else {
             Toast.makeText(
                 requireContext(),
                 "불허",
@@ -48,6 +49,7 @@ class GalleryFragment : Fragment() {
         }
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,7 +67,21 @@ class GalleryFragment : Fragment() {
         binding.btnGalleryPickImage.setOnClickListener {
             launcher.launch("image/*")
         }
+        uploadMusic()
     }
+
+    private fun uploadMusic() {
+        with(binding) {
+            btnComplete.setOnClickListener {
+                if (!etId.text.isNullOrBlank() && !etSinger.text.isNullOrBlank()) {
+                    viewModel.setRequestBody(
+                        ContentUriRequestBody(requireContext(),imgUri),etId.text.toString(),
+                            etSinger.text.toString())
+                }
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
